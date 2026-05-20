@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>520 · 纪念日快乐</title>
+  <style>
+    :root {
+      --bg: #f8efe8;
+      --bg-soft: #fdf7f2;
+      --ink: #2c1f24;
+      --muted: #7f646f;
+      --rose: #cc7a8b;
+      --rose-deep: #9c5766;
+      --gold: #d8bb75;
+      --card: rgba(255, 250, 246, 0.78);
+      --line: rgba(156, 87, 102, 0.18);
+      --shadow: 0 24px 70px rgba(83, 45, 55, 0.16);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --paper: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,246,241,0.78));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Georgia", "Palatino Linotype", "Microsoft YaHei", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 219, 228, 0.8), transparent 28%),
+        radial-gradient(circle at 88% 18%, rgba(223, 208, 167, 0.62), transparent 20%),
+        radial-gradient(circle at 76% 80%, rgba(231, 197, 207, 0.65), transparent 22%),
+        linear-gradient(180deg, #f8efe8 0%, #f6ece6 44%, #fef8f3 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      width: 22rem;
+      height: 22rem;
+      top: -7rem;
+      right: -6rem;
+      border: 18px solid rgba(216, 187, 117, 0.2);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
+      transform: rotate(12deg);
+    }
+
+    body::after {
+      width: 16rem;
+      height: 16rem;
+      top: 3.6rem;
+      right: 3rem;
+      border: 12px solid rgba(216, 187, 117, 0.16);
+      transform: rotate(-18deg);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 28px;
+      padding: 30px;
+      min-height: 92vh;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--paper);
+      border: 1px solid rgba(255,255,255,0.85);
+      border-radius: 36px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      z-index: -1;
+    }
+
+    .hero-copy {
+      padding: 16px 6px 16px 10px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+    }
+
+    .hero h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.8rem, 5vw, 5.2rem);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--rose-deep);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      margin-top: 14px;
+      letter-spacing: 0.01em;
+    }
+
+    .lead {
+      max-width: 34rem;
+      font-size: 1.08rem;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .button,
+    .ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.98rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, background 200ms ease;
+    }
+
+    .button {
+      background: linear-gradient(135deg, #bf697a, #9f5463);
+      color: #fff8f7;
+      box-shadow: 0 12px 24px rgba(156, 87, 102, 0.28);
+    }
+
+    .ghost {
+      background: rgba(255,255,255,0.66);
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .music-toggle {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid rgba(255,255,255,0.85);
+      border-radius: 999px;
+      background: rgba(44, 31, 36, 0.86);
+      color: #fffaf7;
+      box-shadow: 0 16px 32px rgba(60, 31, 40, 0.22);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .music-toggle small {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.8rem;
+    }
+
+    .button:hover,
+    .ghost:hover {
+      transform: translateY(-2px);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 38rem;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(255,255,255,0.74);
+      border-radius: 18px;
+      padding: 14px 16px;
+      box-shadow: 0 12px 28px rgba(95, 53, 64, 0.08);
+    }
+
+    .stat .label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      color: var(--rose-deep);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 640px;
+    }
+
+    .video-card {
+      position: absolute;
+      inset: 36px 68px 76px 64px;
+      padding: 14px;
+      border-radius: 34px;
+      background: rgba(32, 22, 27, 0.92);
+      box-shadow: 0 32px 68px rgba(47, 27, 36, 0.28);
+      transform: rotate(-5deg);
+      overflow: hidden;
+    }
+
+    .video-card::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28%;
+      height: 16px;
+      border-radius: 0 0 16px 16px;
+      background: rgba(17, 12, 15, 0.95);
+      z-index: 2;
+    }
+
+    .video-card video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 24px;
+      background: #000;
+    }
+
+    .video-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      color: #fff;
+      background: linear-gradient(180deg, rgba(22, 12, 17, 0.18), rgba(22, 12, 17, 0.76));
+      backdrop-filter: blur(8px);
+      z-index: 2;
+    }
+
+    .video-caption strong {
+      display: block;
+      font-size: 1.02rem;
+      margin-bottom: 4px;
+    }
+
+    .video-caption span {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .polaroid {
+      position: absolute;
+      width: clamp(160px, 28vw, 240px);
+      background: #fffaf5;
+      padding: 12px 12px 54px;
+      border-radius: 8px;
+      box-shadow: 0 16px 40px rgba(74, 39, 49, 0.16);
+      transform-origin: center;
+    }
+
+    .polaroid img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1.2;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+
+    .polaroid span {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      font-family: "Segoe Print", "KaiTi", cursive;
+      color: #6a535b;
+      font-size: 0.94rem;
+    }
+
+    .p1 {
+      top: 8px;
+      left: -10px;
+      transform: rotate(-8deg);
+    }
+
+    .p2 {
+      top: 44px;
+      right: -18px;
+      transform: rotate(9deg);
+    }
+
+    .p3 {
+      bottom: 10px;
+      left: 10px;
+      transform: rotate(6deg);
+    }
+
+    .section {
+      margin-top: 28px;
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      background: var(--paper);
+      border: 1px solid rgba(255,255,255,0.84);
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .section-header p {
+      max-width: 34rem;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .memory {
+      display: grid;
+      grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+      gap: 16px;
+      padding: 16px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(255,255,255,0.92);
+    }
+
+    .memory img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 10px 20px rgba(56, 31, 39, 0.12);
+    }
+
+    .memory .meta {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      padding-right: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(204, 122, 139, 0.12);
+      color: var(--rose-deep);
+      font-size: 0.86rem;
+      letter-spacing: 0.04em;
+    }
+
+    .memory h3 {
+      margin: 0;
+      font-size: 1.55rem;
+    }
+
+    .memory p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .insight-cards {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .data-card,
+    .panel-card {
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 24px;
+      box-shadow: 0 14px 34px rgba(73, 40, 50, 0.1);
+    }
+
+    .data-card {
+      padding: 18px;
+    }
+
+    .data-card .label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-bottom: 10px;
+    }
+
+    .data-card strong {
+      display: block;
+      font-size: clamp(1.55rem, 2.6vw, 2.2rem);
+      color: var(--rose-deep);
+      margin-bottom: 6px;
+    }
+
+    .data-card p {
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .panel-card {
+      padding: 20px;
+    }
+
+    .panel-card h3 {
+      margin: 0 0 14px;
+      font-size: 1.35rem;
+    }
+
+    .panel-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .word-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+      align-items: center;
+      min-height: 220px;
+    }
+
+    .cloud-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(252, 241, 236, 0.95);
+      color: var(--rose-deep);
+      line-height: 1;
+    }
+
+    .cloud-item small {
+      color: var(--muted);
+      font-size: 0.72em;
+    }
+
+    .phrase-list,
+    .keyword-bars,
+    .hour-chart {
+      display: grid;
+      gap: 12px;
+    }
+
+    .phrase-row,
+    .bar-row,
+    .hour-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .phrase-rank,
+    .bar-label,
+    .hour-label {
+      color: var(--muted);
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .phrase-track,
+    .bar-track,
+    .hour-track {
+      position: relative;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(204, 122, 139, 0.12);
+      overflow: hidden;
+    }
+
+    .phrase-fill,
+    .bar-fill,
+    .hour-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #d8909f, #a85d6d);
+    }
+
+    .phrase-text {
+      font-size: 0.96rem;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .phrase-meta,
+    .bar-value,
+    .hour-value {
+      color: var(--rose-deep);
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+
+    .recap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .recap-card {
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 14px 34px rgba(73, 40, 50, 0.1);
+    }
+
+    .recap-card .month {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(204, 122, 139, 0.12);
+      color: var(--rose-deep);
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+    }
+
+    .recap-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+
+    .recap-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .heatmap-wrapper {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .month-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .month-card {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(255,255,255,0.86);
+    }
+
+    .month-card h4 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+
+    .month-card .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .month-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .heat-cell {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      background: rgba(204, 122, 139, 0.08);
+      border: 1px solid rgba(255,255,255,0.5);
+      position: relative;
+    }
+
+    .heat-cell.is-empty {
+      opacity: 0.35;
+      background: rgba(127, 100, 111, 0.05);
+    }
+
+    .heat-cell:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 8px);
+      transform: translateX(-50%);
+      min-width: max-content;
+      padding: 6px 8px;
+      border-radius: 8px;
+      background: rgba(44, 31, 36, 0.92);
+      color: #fff;
+      font-size: 0.72rem;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .heatmap-note {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(255,255,255,0.88);
+    }
+
+    .heatmap-note h3 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+    }
+
+    .heatmap-note p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .mini-stats {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .mini-stats div {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(248, 239, 232, 0.95);
+      color: var(--ink);
+    }
+
+    .relationship-shell {
+      margin-top: 18px;
+      padding: 24px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.64);
+      border: 1px solid rgba(255,255,255,0.88);
+    }
+
+    .relationship-diagram {
+      display: grid;
+      grid-template-columns: 1fr 160px 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .flow-side {
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(253, 247, 242, 0.88);
+      min-height: 250px;
+      box-shadow: 0 14px 28px rgba(83, 45, 55, 0.08);
+    }
+
+    .flow-side h3 {
+      margin: 0 0 6px;
+      font-size: 1.28rem;
+    }
+
+    .flow-side p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .flow-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .flow-chip {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(216, 144, 159, 0.18), rgba(168, 93, 109, 0.1));
+      border: 1px solid rgba(168, 93, 109, 0.14);
+      color: var(--rose-deep);
+    }
+
+    .flow-chip strong {
+      font-size: 1rem;
+    }
+
+    .flow-chip small {
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .relationship-center {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+      align-content: center;
+    }
+
+    .orbit-line {
+      position: absolute;
+      inset: 50% 0 auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(204,122,139,0.25), rgba(216,187,117,0.35), rgba(204,122,139,0.25));
+      transform: translateY(-50%);
+    }
+
+    .person-card {
+      position: relative;
+      z-index: 1;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: radial-gradient(circle at 30% 30%, #fff9f6, #f5ddd4);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 12px 28px rgba(83, 45, 55, 0.12);
+    }
+
+    .person-card strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .person-card span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .quote-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(255,255,255,0.88);
+      position: relative;
+    }
+
+    .quote-card::before {
+      content: "chat";
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      margin-bottom: 12px;
+    }
+
+    .quote-card p {
+      margin: 0;
+      line-height: 1.9;
+      color: var(--ink);
+    }
+
+    .quote-card small {
+      display: block;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .video-panel {
+      display: grid;
+      grid-template-columns: 0.98fr 1.02fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .wide-video {
+      padding: 14px;
+      border-radius: 28px;
+      background: rgba(32, 22, 27, 0.95);
+      box-shadow: 0 24px 52px rgba(52, 28, 38, 0.22);
+    }
+
+    .wide-video video {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+      object-fit: cover;
+      aspect-ratio: 10 / 16;
+      background: #000;
+    }
+
+    .video-note {
+      padding: 20px 22px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.66);
+      border: 1px solid rgba(255,255,255,0.82);
+    }
+
+    .video-note h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.8rem;
+    }
+
+    .video-note p {
+      margin: 0 0 14px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .mini-list div {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(248, 239, 232, 0.95);
+      color: var(--ink);
+    }
+
+    .letter-shell {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .letter-shell::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -20% -6%;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(204,122,139,0.16), transparent 62%);
+      pointer-events: none;
+    }
+
+    .lyric-card {
+      padding: 24px;
+      border-radius: 28px;
+      background: rgba(255, 250, 246, 0.82);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 18px 40px rgba(73, 40, 50, 0.1);
+    }
+
+    .lyric-card p {
+      margin: 0;
+      white-space: pre-line;
+      line-height: 2.05;
+      color: #4a343d;
+      font-size: 1.02rem;
+    }
+
+    .lyric-card small {
+      display: block;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .letter-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 28px;
+      background: rgba(255, 250, 246, 0.82);
+      border: 1px solid rgba(255,255,255,0.9);
+    }
+
+    .letter-card p {
+      margin: 0;
+      line-height: 2;
+      color: #4a343d;
+      white-space: pre-line;
+    }
+
+    .letter-card[hidden] {
+      display: none;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 24px 0 8px;
+      font-size: 0.95rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .video-panel,
+      .timeline,
+      .quote-grid,
+      .insights-grid,
+      .heatmap-wrapper,
+      .recap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .insight-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .relationship-diagram {
+        grid-template-columns: 1fr;
+      }
+
+      .relationship-center {
+        order: -1;
+        min-height: 180px;
+      }
+
+      .month-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-visual {
+        min-height: 720px;
+      }
+
+      .memory {
+        grid-template-columns: 1fr;
+      }
+
+      .memory img {
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 10px;
+      }
+
+      .hero,
+      .section {
+        padding: 18px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .insight-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 620px;
+      }
+
+      .video-card {
+        inset: 20px 22px 84px 22px;
+        transform: rotate(-2deg);
+      }
+
+      .polaroid {
+        width: 148px;
+      }
+
+      .p1 {
+        top: 0;
+        left: -4px;
+      }
+
+      .p2 {
+        right: 0;
+        top: 28px;
+      }
+
+      .p3 {
+        bottom: 0;
+        left: 4px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgm" loop preload="none">
+    <source src="./TizzyT - 100.wav" type="audio/wav" />
+    <source src="./TizzyT - 100.flac" type="audio/flac" />
+    <source src="./TizzyT - 100.flac" type="audio/x-flac" />
+  </audio>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="切换背景音乐">
+    <span id="musicText">打开 BGM</span>
+    <small id="musicHint">TizzyT - 100 · 若没响点我</small>
+  </button>
+  <main class="page">
+    <section class="hero reveal">
+      <div class="hero-copy">
+        <div class="eyebrow">520 · 2026年5月20日</div>
+        <h1>
+          520 纪念日快乐
+          <span>把“想你”过成了真的日常</span>
+        </h1>
+        <p class="lead">
+          本来只是想做一个普通网页给你，可是把这些照片和那段带着对戒背景的纪念视频放在一起的时候，
+          我突然觉得，我们已经把喜欢写成了一本会发光的小小手账。
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#timeline">往下翻我们的故事</a>
+          <button class="ghost" id="openLetter" type="button">点开今天的情书</button>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <span class="label">今天的关键词</span>
+            <strong>520 和 纪念日快乐</strong>
+          </div>
+          <div class="stat">
+            <span class="label">从 2025.10.15 开始</span>
+            <strong id="dayCount">217 天</strong>
+          </div>
+          <div class="stat">
+            <span class="label">一起走过的时分秒</span>
+            <strong id="liveClock">00:00:00</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="polaroid p1">
+          <img src="./imgs/微信图片_20260520192045_551_43.jpg" alt="在南京第一次线下见面的合照" />
+          <span>南京的早晨</span>
+        </div>
+        <div class="polaroid p2">
+          <img src="./imgs/微信图片_20260520192046_552_43.jpg" alt="在合肥精心打扮拍下的拍立得照片" />
+          <span>合肥 JKDK</span>
+        </div>
+        <div class="polaroid p3">
+          <img src="./imgs/微信图片_20260520192047_554_43.jpg" alt="在樱花树下比出小猫手势的合照" />
+          <span>樱花树下的小猫</span>
+        </div>
+        <div class="video-card">
+          <video controls autoplay muted loop playsinline preload="metadata">
+            <source src="./imgs/9089be7605d75a58651025e2052fd682_web.mp4" type="video/mp4" />
+            <source src="./imgs/9089be7605d75a58651025e2052fd682.mp4" type="video/mp4" />
+          </video>
+          <div class="video-caption">
+            <strong>今天最重要的一段视频</strong>
+            <span>它里面的对戒背景，像把我们认真喜欢过的那些日子轻轻圈在一起。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="timeline">
+      <div class="section-header">
+        <div>
+          <h2>我们的时间线</h2>
+        </div>
+        <p>
+          如果把喜欢拆开看，它不是一句很大的表白，而是很多个很具体的时刻。
+          是醒得很早的一张合照，是认真打扮的一次出门，也是你在的城市里，我一次又一次想奔向你的心情。
+        </p>
+      </div>
+
+      <div class="timeline">
+        <article class="memory">
+          <img src="./imgs/微信图片_20260520192045_551_43.jpg" alt="南京第一次线下见面时的合照" />
+          <div class="meta">
+            <span class="tag">第一站 · 南京</span>
+            <h3>醒得很早的那天早上</h3>
+            <p>
+              第一次线下见面这件事，本身就已经足够心跳了。可我最喜欢的，还是这种一点都不夸张的瞬间：
+              很近、很安静、很真实，像把“终于见到你”轻轻放进了日常里。
+            </p>
+          </div>
+        </article>
+
+        <article class="memory">
+          <img src="./imgs/微信图片_20260520192046_552_43.jpg" alt="在合肥穿着JK和DK拍下的拍立得" />
+          <div class="meta">
+            <span class="tag">第二站 · 合肥</span>
+            <h3>精心打扮也精心喜欢</h3>
+            <p>
+              这张照片真的很像我们。认真准备、认真出门、认真把彼此放在眼里，
+              连拍立得的边框都像在替我们留档：原来可爱、认真和心动，是可以同时发生的。
+            </p>
+          </div>
+        </article>
+
+        <article class="memory">
+          <img src="./imgs/微信图片_20260520192047_554_43.jpg" alt="在芜湖樱花树下的合照" />
+          <div class="meta">
+            <span class="tag">第三站 · 芜湖市区</span>
+            <h3>樱花树下假装小猫</h3>
+            <p>
+              春天、夜色、樱花，还有我们一起比出的手势。这个画面特别像一句很轻的情话：
+              和你在一起的时候，我会不自觉地变得更幼稚一点，更可爱一点，也更想一直靠近一点。
+            </p>
+          </div>
+        </article>
+
+        <article class="memory">
+          <img src="./imgs/微信图片_20260520192047_555_43.jpg" alt="在湾沚KTV的照片" />
+          <div class="meta">
+            <span class="tag">第四站 · 湾沚 KTV</span>
+            <h3>前几天的我们，还是这么近</h3>
+            <p>
+              喜欢一件事最难得的地方，是过了很久之后还是会觉得“幸好是你”。
+              这张照片离今天很近，所以它也很适合放在这里提醒我：我现在依然非常喜欢你。
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-header">
+        <div>
+          <h2>如果把想念排成聊天框</h2>
+        </div>
+        <p>
+          我想把这些话留给你看。不是多漂亮的话，就是我们平时真的会这样讲话，所以每一句都很像我们。
+        </p>
+      </div>
+
+      <div class="quote-grid">
+        <article class="quote-card">
+          <p>“只对你双标只溺爱你。”</p>
+          <small>2025.09.30 · 那时候我们才刚刚靠近一点点，你就已经这样明目张胆地偏爱我了。</small>
+        </article>
+        <article class="quote-card">
+          <p>“见面之前我可以多陪陪你。”</p>
+          <small>2025.10.02 · 你说这句话的时候，我就觉得自己已经被你好好放在心上了。</small>
+        </article>
+        <article class="quote-card">
+          <p>“我现在也在好好爱。”</p>
+          <small>2025.11.01 · 这句我一直都很喜欢，因为它不是热闹的一句喜欢，是很认真的一句。</small>
+        </article>
+        <article class="quote-card">
+          <p>“亲亲小宝宝。”</p>
+          <small>2025.12.25 · 到了冬天，我们说话已经变得这样亲，像每天都要贴一下才安心。</small>
+        </article>
+        <article class="quote-card">
+          <p>“我亲亲小宝宝嘛。”</p>
+          <small>2026.01.25 · 新的一年里你还是会这样哄我，我每次看见都会一下子软下来。</small>
+        </article>
+        <article class="quote-card">
+          <p>“我有点想你了猫！”</p>
+          <small>2026.02.13 · 二月的想念还是会这样跑出来，光是看见这句我就会开始想抱你。</small>
+        </article>
+        <article class="quote-card">
+          <p>“乖宝乖宝。”</p>
+          <small>2026.03.21 · 到了三月，我们连叫对方的语气都已经变成很熟悉很自然的亲近。</small>
+        </article>
+        <article class="quote-card">
+          <p>“亲亲小宝宝。”</p>
+          <small>2026.04.03 · 四月你也还是会这样哄我、亲我，我就会觉得被喜欢原来可以这么踏实。</small>
+        </article>
+        <article class="quote-card">
+          <p>“老婆乖乖等我哦。”</p>
+          <small>2026.05.11 · 看到这句的时候我就会想，原来被老婆哄着等一等也是一件很幸福的事。</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="chat-insights">
+      <div class="section-header">
+        <div>
+          <h2>把聊天记录变成恋爱数据</h2>
+        </div>
+        <p>
+          我把从 2025 年 10 月 15 日到 2026 年 5 月 20 日的聊天记录偷偷整理了一下。
+          原来喜欢一个人，真的会在这么多句日常里留下痕迹。
+        </p>
+      </div>
+
+      <div class="insight-cards">
+        <article class="data-card">
+          <span class="label">消息总数</span>
+          <strong id="metricTotal">--</strong>
+          <p>从我们在一起开始，到现在已经聊了这么多句。</p>
+        </article>
+        <article class="data-card">
+          <span class="label">连续聊天</span>
+          <strong id="metricStreak">--</strong>
+          <p>原来我们真的把彼此放进了每天。</p>
+        </article>
+        <article class="data-card">
+          <span class="label">聊天覆盖天数</span>
+          <strong id="metricDays">--</strong>
+          <p>很多普通的一天，都因为有你变得不普通。</p>
+        </article>
+        <article class="data-card">
+          <span class="label">最热闹的一天</span>
+          <strong id="metricBusyDay">--</strong>
+          <p id="metricBusyDayText">--</p>
+        </article>
+        <article class="data-card">
+          <span class="label">最常聊天的时段</span>
+          <strong id="metricHour">--</strong>
+          <p id="metricHourText">--</p>
+        </article>
+      </div>
+
+      <div class="insights-grid">
+        <article class="panel-card">
+          <h3>我们的聊天词云</h3>
+          <p>这些词一多起来，我就知道我们真的把喜欢说进了日常里。</p>
+          <div class="word-cloud" id="wordCloud"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>最常说的话</h3>
+          <p>翻出来看才发现，我们平时真的就是这样黏黏糊糊地讲话。</p>
+          <div class="phrase-list" id="topPhrases"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>偏爱关键词榜</h3>
+          <p>把喜欢拆开看，会变成宝宝、亲亲、老婆、想你这样很具体的词。</p>
+          <div class="keyword-bars" id="keywordBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>聊天时段分布</h3>
+          <p>一天下来最常在哪些时间想起彼此，也能从记录里看得很清楚。</p>
+          <div class="hour-chart" id="hourChart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-header">
+        <div>
+          <h2>再把这几个月慢慢翻一遍</h2>
+        </div>
+        <p>
+          我把我们这一路又往回看了一次。每个月都不一样，但每个月里都有很明确的你，也都有越来越明显的喜欢。
+        </p>
+      </div>
+
+      <div class="recap-grid" id="monthlyRecap"></div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-header">
+        <div>
+          <h2>很多天都被我们聊亮了</h2>
+        </div>
+        <p>
+          原来把日历摊开以后会这么明显。那些普通的日子，因为一直有你在回我、陪我、想我，就全都发着光。
+        </p>
+      </div>
+
+      <div class="heatmap-wrapper">
+        <div class="month-grid" id="monthGrid"></div>
+
+        <div class="heatmap-note">
+          <h3>翻到哪里，哪里都有我们</h3>
+          <p>
+            我很喜欢这一页，因为它不像一句话那么直接，却能让我一下子看见我们是真的把彼此过成了习惯。
+          </p>
+          <p>
+            从 2025 年 10 月 15 日到现在，原来真的已经有这么多天，都在和你说话。
+          </p>
+          <div class="mini-stats" id="miniStats"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-header">
+        <div>
+          <h2>我们平时都怎么叫对方</h2>
+        </div>
+        <p>
+          翻聊天记录的时候我才发现，喜欢一个人以后，连称呼都会慢慢长出很多版本，而且一看就知道是属于我们的。
+        </p>
+      </div>
+
+      <div class="relationship-shell">
+        <div class="relationship-diagram">
+          <div class="flow-side">
+            <h3>我叫你的时候</h3>
+            <p>我一开口叫你，就总是会越叫越近，越叫越舍不得收回去。</p>
+            <div class="flow-tags" id="flowMe"></div>
+          </div>
+
+          <div class="relationship-center">
+            <div class="orbit-line"></div>
+            <div class="person-card">
+              <strong>我们</strong>
+              <span id="relationshipCenterMain">好多句喜欢</span>
+            </div>
+            <div class="person-card">
+              <strong id="relationshipCenterSub">--</strong>
+              <span>没有断过联系</span>
+            </div>
+          </div>
+
+          <div class="flow-side">
+            <h3>你叫我的时候</h3>
+            <p>你叫我的那些名字，我一看到就会知道，你现在一定是在很认真地靠近我。</p>
+            <div class="flow-tags" id="flowHer"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-header">
+        <div>
+          <h2>那段纪念视频</h2>
+        </div>
+        <p>
+          我还是想把这段视频单独放在这里。
+          每次点开它，我都会再一次觉得，和你走到现在真的很好。
+        </p>
+      </div>
+
+      <div class="video-panel">
+        <div class="wide-video">
+          <video controls autoplay muted loop playsinline preload="metadata">
+            <source src="./imgs/9089be7605d75a58651025e2052fd682_web.mp4" type="video/mp4" />
+            <source src="./imgs/9089be7605d75a58651025e2052fd682.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="video-note">
+          <h3>有些日子，值得被单独收藏</h3>
+          <p>
+            是第一次见面时的紧张，是拍照时偷偷看向彼此的眼神，
+            是去你所在的城市时我一点都不觉得远的路程，也是今天打开这个页面时，我还是会怦然心动。
+          </p>
+          <p>
+            视频里的对戒背景很像一个特别安静的承诺。没有很大声，但足够坚定。
+          </p>
+          <div class="mini-list">
+            <div>今天是 2026 年 5 月 20 日。</div>
+            <div>我们从 2025 年 10 月 15 日开始，一路走到了今天。</div>
+            <div>这页是我做给你的 520 礼物。</div>
+            <div>那个带着对戒背景的视频，是属于我们的另一份纪念。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-header">
+        <div>
+          <h2>想送给你的歌词</h2>
+        </div>
+        <p>
+          听到这段歌词的时候我就很想起你，所以也想把它放在这里给你看。
+        </p>
+      </div>
+
+      <div class="lyric-card">
+        <p>这个乱糟糟的世界
+祈祷我们可以避开所有苦难
+如果可以的话
+跟你一起我想时间变得缓慢
+直到我们慢慢老去
+春夏秋冬感受四季转换
+日子一天一天平平淡淡
+我想要的多么简单
+所以当下我最大的愿望
+就是能够和你维持现状
+当我们靠在一起吹着晚风
+看月亮还是照常挂在天上
+想把这份礼物送到你的手中
+我希望它最好不要 delay</p>
+        <small>“平平淡淡”和“慢慢老去”这两个愿望，真的很像我想和你一起拥有的以后。</small>
+      </div>
+    </section>
+
+    <section class="section letter-shell reveal" id="letter">
+      <div class="section-header">
+        <div>
+          <h2>写给你的小情书</h2>
+        </div>
+        <p>
+          这封信我想慢一点给你看，所以做成了点开以后才会出现。
+        </p>
+      </div>
+
+      <button class="button" id="toggleLetter" type="button">展开这封信</button>
+      <div class="letter-card" id="letterCard" hidden>
+        <p>其实做这个网页的时候，我脑子里一直有一个问题，就是我今天到底想和老婆说什么。
+
+想了很久以后我发现，我好像不是想说一句很厉害的话，也不是想写一封看起来很漂亮很工整的信。我只是想在 520 这天，很认真地告诉老婆，我到现在还是会因为喜欢你这件事而心软，会因为想到你而开心，会因为看见这些照片和聊天记录就忍不住一直往下翻，一边翻一边想，原来我们已经一起走了这么多天。
+
+我有时候真的会觉得很神奇。明明你现在已经变成我生活里很自然的一部分了，自然到我会下意识想和你说话，下意识想让你知道我在干嘛，下意识在一些很小的时候想起你，可是我回头看又会觉得，怎么就真的走到这里了，怎么就真的这么喜欢了，怎么就真的会在分开以后这么想见，在见面之前又这么期待。
+
+而且我觉得老婆对我来说，不只是恋爱的对象，不只是我会说喜欢的人。你更像一个会让我安静下来的人。以前我情绪乱的时候，会一个人想很多，会自己钻牛角尖，会突然觉得空空的，不知道该怎么排解。现在我还是会有不开心的时候，还是会有难受、别扭、委屈的时候，可是我不会像以前那样觉得自己只能一个人待着了，因为我知道我还可以去找老婆，我知道你会听我说话，会叫我不要憋着，会耐心地和我讲很多很多话。
+
+我真的很喜欢这种感觉。不是那种表面上热闹的喜欢，而是一种很稳的、很具体的、会落到每一天里的喜欢。是你叫我宝宝的时候，是你和我说晚安的时候，是你想我了就会直接告诉我的时候，是我心情不好你会把我捞回来的时候，也是我一边心疼你一边又会觉得，老婆怎么这么可爱、这么让人放不下的时候。
+
+我也会心疼你。这个念头其实特别常见，常见到我已经不把它当成一种突然冒出来的情绪了，而是我喜欢你以后很自然的一部分。你有压力的时候，你委屈的时候，你掉眼泪的时候，你做噩梦的时候，你身体不舒服的时候，我都会忍不住想，要是我现在就在你旁边就好了，要是我可以马上抱住你就好了。虽然很多时候我能做的事情没有那么多，但我还是会很想让老婆知道，你不是一个人，你有我，我是很坚定地站在你这边的。
+
+其实我也不是一直都那么厉害。我也会敏感，会乱想，会不安，会偶尔不知道怎么表达自己。可是我很喜欢我们现在这样，喜欢我们不是非要装成什么都不怕的人，喜欢我们会有情绪、会有别扭、也会有需要彼此哄的时候。因为这反而让我觉得，我们不是在演一段关系，我们是真的在很认真地过一段关系。
+
+我现在越来越能确定一件事，就是我真的很喜欢和老婆一起生活的感觉。哪怕只是聊天，哪怕只是说一点很碎很碎的小事，哪怕只是一起听歌、一起发呆、一起各做各的事情，我都会觉得很满足。那种满足不是很夸张的快乐，而是一种很安稳的开心，像心里有个地方被你放得很妥当。
+
+所以今天我想写给老婆的话，其实也很简单。
+
+我想继续喜欢你。
+想继续陪你。
+想继续听你说很多很多话。
+想继续在你不安的时候抱你，在你开心的时候和你一起开心，在你说想我的时候也立刻告诉你我也在想你。
+
+我不知道以后会发生多少事情，也不知道未来到底会是什么样子，但是至少现在，我是很真诚地想把以后很多时间都留给老婆的。我想和你见很多很多次面，想和你再拍很多很多照片，想和你过更多纪念日，也想在很多年以后回头看的时候，还是会觉得当时喜欢上你、选择你，是一件特别好、特别值得庆幸的事情。
+
+520 快乐老婆。
+也谢谢你喜欢我。
+以后也请继续待在我身边，让我继续很喜欢很喜欢你。</p>
+      </div>
+    </section>
+
+    <div class="footer">
+      做给你的 520 页面 · 愿我们一直在彼此身边
+    </div>
+  </main>
+
+  <script src="./chat_stats.js"></script>
+  <script>
+    const anniversaryStart = new Date("2025-10-15T00:00:00+08:00");
+    const chatStats = window.CHAT_STATS || null;
+    const dayCount = document.getElementById("dayCount");
+    const liveClock = document.getElementById("liveClock");
+    const letterCard = document.getElementById("letterCard");
+    const toggleLetter = document.getElementById("toggleLetter");
+    const openLetter = document.getElementById("openLetter");
+    const bgm = document.getElementById("bgm");
+    const musicToggle = document.getElementById("musicToggle");
+    const musicText = document.getElementById("musicText");
+
+    function formatNumber(value) {
+      return new Intl.NumberFormat("zh-CN").format(value);
+    }
+
+    function setText(id, value) {
+      const node = document.getElementById(id);
+      if (node) {
+        node.textContent = value;
+      }
+    }
+
+    function updateMusicLabel() {
+      if (!bgm || !musicText) {
+        return;
+      }
+      musicText.textContent = bgm.paused ? "打开 BGM" : "暂停 BGM";
+    }
+
+    async function tryPlayMusic() {
+      if (!bgm) {
+        return;
+      }
+      try {
+        await bgm.play();
+      } catch (_) {
+        // Browsers may block autoplay with sound until a user gesture.
+      }
+      updateMusicLabel();
+    }
+
+    function renderChatInsights() {
+      if (!chatStats) {
+        return;
+      }
+
+      setText("metricTotal", formatNumber(chatStats.total_messages));
+      setText("metricStreak", `${chatStats.longest_streak_days} 天`);
+      setText("metricDays", `${chatStats.days_chatted} 天`);
+      setText("metricBusyDay", chatStats.busiest_day.date);
+      setText("metricBusyDayText", `那天我们一共发了 ${formatNumber(chatStats.busiest_day.count)} 条消息。`);
+      setText("metricHour", `${String(chatStats.top_hour.hour).padStart(2, "0")}:00`);
+      setText("metricHourText", `这一小时里一共聊了 ${formatNumber(chatStats.top_hour.count)} 条。`);
+
+      renderWordCloud(chatStats.word_cloud || []);
+      renderTopPhrases(chatStats.top_phrases || []);
+      renderKeywordBars((chatStats.keyword_counts || []).slice(0, 8));
+      renderHourChart(chatStats.hour_distribution || []);
+      renderMonthlyRecap(chatStats.daily_activity || []);
+      renderHeatmap(chatStats.daily_activity || []);
+      renderRelationshipMap(chatStats.relationship_map || {});
+    }
+
+    function renderWordCloud(items) {
+      const container = document.getElementById("wordCloud");
+      if (!container || !items.length) {
+        return;
+      }
+      const max = Math.max(...items.map((item) => item.count));
+      const min = Math.min(...items.map((item) => item.count));
+      items.forEach((item) => {
+        const chip = document.createElement("span");
+        chip.className = "cloud-item";
+        const scale = max === min ? 1 : (item.count - min) / (max - min);
+        chip.style.fontSize = `${1 + scale * 1.1}rem`;
+        chip.innerHTML = `${item.word}<small>${formatNumber(item.count)}</small>`;
+        container.appendChild(chip);
+      });
+    }
+
+    function renderTopPhrases(items) {
+      const container = document.getElementById("topPhrases");
+      if (!container || !items.length) {
+        return;
+      }
+      const max = Math.max(...items.map((item) => item.count));
+      items.forEach((item, index) => {
+        const row = document.createElement("div");
+        row.innerHTML = `
+          <div class="phrase-text">“${item.text}”</div>
+          <div class="phrase-row">
+            <span class="phrase-rank">TOP ${index + 1}</span>
+            <div class="phrase-track"><span class="phrase-fill" style="width:${(item.count / max) * 100}%"></span></div>
+            <span class="phrase-meta">${formatNumber(item.count)} 次</span>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function renderKeywordBars(items) {
+      const container = document.getElementById("keywordBars");
+      if (!container || !items.length) {
+        return;
+      }
+      const max = Math.max(...items.map((item) => item.count));
+      items.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "bar-row";
+        row.innerHTML = `
+          <span class="bar-label">${item.word}</span>
+          <div class="bar-track"><span class="bar-fill" style="width:${(item.count / max) * 100}%"></span></div>
+          <span class="bar-value">${formatNumber(item.count)}</span>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function renderHourChart(items) {
+      const container = document.getElementById("hourChart");
+      if (!container || !items.length) {
+        return;
+      }
+      const sorted = [...items].sort((a, b) => b.count - a.count).slice(0, 8).sort((a, b) => a.hour - b.hour);
+      const max = Math.max(...sorted.map((item) => item.count));
+      sorted.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "hour-row";
+        row.innerHTML = `
+          <span class="hour-label">${String(item.hour).padStart(2, "0")}:00</span>
+          <div class="hour-track"><span class="hour-fill" style="width:${(item.count / max) * 100}%"></span></div>
+          <span class="hour-value">${formatNumber(item.count)}</span>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function formatShortDate(dateStr) {
+      return dateStr.replaceAll("-", ".");
+    }
+
+    function groupDaysByMonth(items) {
+      return items.reduce((map, item) => {
+        const key = item.date.slice(0, 7);
+        if (!map.has(key)) {
+          map.set(key, []);
+        }
+        map.get(key).push(item);
+        return map;
+      }, new Map());
+    }
+
+    function renderMonthlyRecap(items) {
+      const container = document.getElementById("monthlyRecap");
+      if (!container || !items.length) {
+        return;
+      }
+
+      const monthlyCopy = [
+        {
+          key: "2025-10",
+          label: "2025.10",
+          title: "喜欢开始有了归处",
+          text: "十月像是把喜欢正式放进生活里的第一个月。很多话都还很新，可是我已经会想多陪你一点、想早点见到你一点。"
+        },
+        {
+          key: "2025-11",
+          label: "2025.11",
+          title: "一句话就能把我哄很久",
+          text: "十一月开始，我已经会被你说的话反复心动。喜欢不只是说出来，还开始落在很细很细的照顾里。"
+        },
+        {
+          key: "2025-12",
+          label: "2025.12",
+          title: "冬天把我们养得更亲",
+          text: "到了冬天，我们说话的语气越来越黏，晚安、亲亲、乖宝这些词，像很自然地就长进了每天。"
+        },
+        {
+          key: "2026-01",
+          label: "2026.01",
+          title: "新的一年还是先想到你",
+          text: "跨到新一年以后，我还是会第一时间想靠近你。那种开心和依赖没有变，反而更顺手地留在了日常里。"
+        },
+        {
+          key: "2026-02",
+          label: "2026.02",
+          title: "二月的想念一点都藏不住",
+          text: "二月很像一句会自己跑出来的想你。哪怕只是隔着屏幕，我也还是会很想很想抱你。"
+        },
+        {
+          key: "2026-03",
+          label: "2026.03",
+          title: "亲昵已经变成一种习惯",
+          text: "三月开始，很多称呼已经不用想就会脱口而出。那种靠近不再突兀，而是变成了我们本来就会这样。"
+        },
+        {
+          key: "2026-04",
+          label: "2026.04",
+          title: "四月也还是很认真地贴近彼此",
+          text: "到了四月，喜欢没有降温，反而更稳了。还是会亲亲，会哄，会在很小的时候下意识想起对方。"
+        },
+        {
+          key: "2026-05",
+          label: "2026.05",
+          title: "五月让我更想把这些都留给你",
+          text: "五月很适合做礼物，也很适合认真回头看一遍。原来我真的已经攒了这么多想给你看的喜欢。"
+        }
+      ];
+
+      const grouped = groupDaysByMonth(items);
+      container.innerHTML = "";
+
+      monthlyCopy.forEach((month) => {
+        const days = grouped.get(month.key) || [];
+        const total = days.reduce((sum, day) => sum + day.count, 0);
+        const peak = days.reduce((best, day) => day.count > best.count ? day : best, { date: month.key, count: 0 });
+
+        const card = document.createElement("article");
+        card.className = "recap-card";
+        card.innerHTML = `
+          <span class="month">${month.label} · ${formatNumber(total)} 句</span>
+          <h3>${month.title}</h3>
+          <p>${month.text} 这个月我们一共说了 ${formatNumber(total)} 句，最热闹的一天是 ${formatShortDate(peak.date)}。</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderHeatmap(items) {
+      const container = document.getElementById("monthGrid");
+      const stats = document.getElementById("miniStats");
+      if (!container || !stats || !items.length) {
+        return;
+      }
+
+      const grouped = groupDaysByMonth(items);
+      const months = ["2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05"];
+      const weekdays = ["日", "一", "二", "三", "四", "五", "六"];
+      const maxCount = Math.max(...items.map((item) => item.count));
+
+      container.innerHTML = "";
+      months.forEach((monthKey) => {
+        const [year, month] = monthKey.split("-").map(Number);
+        const monthLabel = `${year}.${String(month).padStart(2, "0")}`;
+        const monthDays = grouped.get(monthKey) || [];
+        const dayMap = new Map(monthDays.map((day) => [day.date, day.count]));
+        const totalDays = new Date(year, month, 0).getDate();
+        const firstWeekday = new Date(year, month - 1, 1).getDay();
+
+        const card = document.createElement("article");
+        card.className = "month-card";
+        card.innerHTML = `
+          <h4>${monthLabel}</h4>
+          <div class="weekdays">${weekdays.map((label) => `<span>${label}</span>`).join("")}</div>
+          <div class="month-days"></div>
+        `;
+
+        const daysContainer = card.querySelector(".month-days");
+        for (let i = 0; i < firstWeekday; i += 1) {
+          const empty = document.createElement("div");
+          empty.className = "heat-cell is-empty";
+          daysContainer.appendChild(empty);
+        }
+
+        for (let day = 1; day <= totalDays; day += 1) {
+          const date = `${monthKey}-${String(day).padStart(2, "0")}`;
+          const count = dayMap.get(date) || 0;
+          const cell = document.createElement("div");
+          cell.className = "heat-cell";
+          cell.dataset.tip = `${formatShortDate(date)} · ${formatNumber(count)} 条消息`;
+          const strength = count === 0 ? 0.08 : 0.2 + (count / maxCount) * 0.72;
+          cell.style.background = `rgba(204, 122, 139, ${strength})`;
+          daysContainer.appendChild(cell);
+        }
+
+        container.appendChild(card);
+      });
+
+      const average = Math.round(chatStats.total_messages / chatStats.days_chatted);
+      stats.innerHTML = `
+        <div>我们平均每天会说 ${formatNumber(average)} 句。</div>
+        <div>最热闹的一天是 ${formatShortDate(chatStats.busiest_day.date)}，那天一共聊了 ${formatNumber(chatStats.busiest_day.count)} 条。</div>
+        <div>深夜也还有 ${formatNumber(chatStats.night_message_count)} 条消息，说明我们是真的很会舍不得睡。</div>
+        <div>${String(chatStats.top_hour.hour).padStart(2, "0")}:00 是最常一起出现的时段，那一小时里聊了 ${formatNumber(chatStats.top_hour.count)} 条。</div>
+      `;
+    }
+
+    function renderRelationshipMap(map) {
+      const left = document.getElementById("flowMe");
+      const right = document.getElementById("flowHer");
+      const centerMain = document.getElementById("relationshipCenterMain");
+      const centerSub = document.getElementById("relationshipCenterSub");
+      if (!left || !right || !centerMain || !centerSub) {
+        return;
+      }
+
+      const renderSide = (container, items) => {
+        container.innerHTML = "";
+        (items || []).slice(0, 6).forEach((item) => {
+          const chip = document.createElement("div");
+          chip.className = "flow-chip";
+          chip.innerHTML = `<strong>${item.word}</strong><small>${formatNumber(item.count)} 次</small>`;
+          container.appendChild(chip);
+        });
+      };
+
+      renderSide(left, map["我"]);
+      renderSide(right, map["喽喽"]);
+      centerMain.textContent = `${formatNumber(chatStats.total_messages)} 句日常`;
+      centerSub.textContent = `${chatStats.longest_streak_days} 天`;
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const diff = Math.max(0, now - anniversaryStart);
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+      dayCount.textContent = `${days} 天`;
+      liveClock.textContent = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    function showLetter() {
+      letterCard.hidden = false;
+      letterCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      toggleLetter.textContent = "把这封信收好";
+    }
+
+    toggleLetter.addEventListener("click", () => {
+      if (letterCard.hidden) {
+        showLetter();
+      } else {
+        letterCard.hidden = true;
+        toggleLetter.textContent = "展开这封信";
+      }
+    });
+
+    openLetter.addEventListener("click", () => {
+      document.getElementById("letter").scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(showLetter, 450);
+    });
+
+    if (musicToggle && bgm) {
+      bgm.volume = 0.55;
+      musicToggle.addEventListener("click", async () => {
+        if (bgm.paused) {
+          await tryPlayMusic();
+        } else {
+          bgm.pause();
+          updateMusicLabel();
+        }
+      });
+
+      document.addEventListener("pointerdown", () => {
+        if (bgm.paused) {
+          tryPlayMusic();
+        }
+      }, { once: true });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
+
+    renderChatInsights();
+    updateMusicLabel();
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
